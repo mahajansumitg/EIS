@@ -1,0 +1,76 @@
+﻿using EIS.model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace EIS.views
+{
+    /// <summary>
+    /// Interaction logic for FormView.xaml
+    /// </summary>
+    public partial class ProfileView : UserControl
+    {
+        public ProfileView(Login user)
+        {
+            InitializeComponent();
+            initializeForm(user);
+        }
+
+        private void initializeForm(Login user){
+            EmpId.Text = user.emp_id;
+            VendorGrid.Visibility = user.role.Equals("contractor") ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+
+            string findQuery = "select * from EmpInfo where emp_id = '" + user.emp_id + "'";
+            List<EmpInfo> EmpInfoList = Connection.getData<EmpInfo>(findQuery);
+            if (EmpInfoList.Count > 0) return;
+
+            EmpInfo empInfo = EmpInfoList.First();
+            FirstName.Text = empInfo.first_name;
+            MiddleName.Text = empInfo.middle_name;
+            LastName.Text = empInfo.last_name;
+            EmailId.Text = empInfo.email_id;
+            EmpId.Text = empInfo.emp_id;
+            DOB.Text = empInfo.dob;
+            DOJ.Text = empInfo.date_of_joining;
+            DOL.Text = empInfo.date_of_leaving;
+            City.Text = empInfo.city;
+            Address.Text = empInfo.address;
+            Dept.Text = empInfo.department;
+            Salary.Text = empInfo.salary.ToString();
+            Vendor.Text = empInfo.vendor;
+        }
+
+        private void updateProfile(object sender, RoutedEventArgs e)
+        {
+            EmpInfo empInfo = new EmpInfo();
+            empInfo.first_name = FirstName.Text;
+            empInfo.middle_name = MiddleName.Text;
+            empInfo.last_name = LastName.Text;
+            empInfo.email_id = EmailId.Text;
+            empInfo.emp_id = EmpId.Text;
+            empInfo.dob = DOB.Text;
+            empInfo.date_of_joining = DOJ.Text;
+            empInfo.date_of_leaving = DOL.Text;
+            empInfo.city = City.Text;
+            empInfo.address = Address.Text;
+            empInfo.department = Dept.Text;
+            empInfo.salary =  Int32.Parse(Salary.Text);
+            empInfo.vendor = Vendor.Text;
+
+            Connection.setData(empInfo);
+            MessageBox.Show("Profile successfully uodated");
+    }
+        
+    }
+}
