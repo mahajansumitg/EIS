@@ -21,6 +21,8 @@ namespace EIS.views
     /// </summary>
     public partial class ProfileView : UserControl
     {
+        Boolean isUserPresent = false;
+
         public ProfileView(Login user)
         {
             InitializeComponent();
@@ -33,17 +35,18 @@ namespace EIS.views
 
             string findQuery = "select * from EmpInfo where emp_id = '" + user.emp_id + "'";
             List<EmpInfo> EmpInfoList = Connection.getData<EmpInfo>(findQuery);
-            if (EmpInfoList.Count > 0) return;
+            if (EmpInfoList.Count == 0) return;
 
+            this.isUserPresent = true;
             EmpInfo empInfo = EmpInfoList.First();
             FirstName.Text = empInfo.first_name;
             MiddleName.Text = empInfo.middle_name;
             LastName.Text = empInfo.last_name;
             EmailId.Text = empInfo.email_id;
             EmpId.Text = empInfo.emp_id;
-            DOB.Text = empInfo.dob;
-            DOJ.Text = empInfo.date_of_joining;
-            DOL.Text = empInfo.date_of_leaving;
+            DOB.Text = empInfo.dob.ToString().Substring(0, 9);
+            DOJ.Text = empInfo.doj.ToString().Substring(0,9);
+            DOL.Text = empInfo.dol.ToString().Substring(0, 9);
             City.Text = empInfo.city;
             Address.Text = empInfo.address;
             Dept.Text = empInfo.department;
@@ -59,16 +62,19 @@ namespace EIS.views
             empInfo.last_name = LastName.Text;
             empInfo.email_id = EmailId.Text;
             empInfo.emp_id = EmpId.Text;
-            empInfo.dob = DOB.Text;
-            empInfo.date_of_joining = DOJ.Text;
-            empInfo.date_of_leaving = DOL.Text;
+            empInfo.dob = DateTime.Parse(DOB.Text);
+            empInfo.doj = DateTime.Parse(DOJ.Text);
+            empInfo.dol = DateTime.Parse(DOL.Text);
             empInfo.city = City.Text;
             empInfo.address = Address.Text;
             empInfo.department = Dept.Text;
             empInfo.salary =  Int32.Parse(Salary.Text);
             empInfo.vendor = Vendor.Text;
 
-            Connection.setData(empInfo);
+            if(isUserPresent)
+                Connection.updateData(empInfo, "emp_id");
+            else
+                 Connection.setData(empInfo);
             MessageBox.Show("Profile successfully uodated");
     }
         

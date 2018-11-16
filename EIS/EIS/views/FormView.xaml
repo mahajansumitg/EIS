@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="EIS.views.FormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EIS.views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White" Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Name="vendorRow"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="Name" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Email Id" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Emp Id" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="DOB" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="DOJ" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="DOL" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="City" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="Address" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Department" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="Salary" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+
+        <TextBox Name="FirstName"  TextAlignment="Center" Text="First Name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="MiddleName" Text="MiddleName" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="LastName" Text="LastName" TextAlignment="Center" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+
+        <TextBox Name="EmailId" TextAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="EmpId" IsReadOnly="True" TextAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="DOB" TextAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center"    VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="DOJ" TextAlignment="Center" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center"    VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="DOL" TextAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="City" TextAlignment="Center" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="Address" TextAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="Dept" TextAlignment="Center" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Name="Salary" TextAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+
+        <Grid Name="VendorGrid" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+                <Label Name = "VendorLabel" Content="Vendor" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+            <TextBox Name="Vendor" TextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        </Grid>
+
+        <Button x:Name="Submit" Content="Submit" Grid.Column="1"  Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center" Width="100" Click="submitForm"/>
+    </Grid>
+</UserControl>

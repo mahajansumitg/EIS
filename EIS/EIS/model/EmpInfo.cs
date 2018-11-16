@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace EIS.model
 {
@@ -14,9 +13,9 @@ namespace EIS.model
         public string last_name;
         public string email_id;
         public string emp_id;
-        public DateTime dob;
-        public DateTime doj;
-        public DateTime dol;
+        public string dob;
+        public string date_of_joining;
+        public string date_of_leaving;
         public string city;
         public string address;
         public string department;

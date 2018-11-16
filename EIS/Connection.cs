@@ -38,6 +38,20 @@ namespace EIS
             return dataReader.Read();
         }
 
+        public static Boolean updateData<T>(T obj, String key)
+        {
+            connection.Open();
+            SqlDataReader dataReader = new SqlCommand(getUpdateQuery(obj, key), connection).ExecuteReader();
+            return dataReader.Read();
+        }
+
+        public static Boolean deleteData<T>(T obj, String key)
+        {
+            connection.Open();
+            SqlDataReader dataReader = new SqlCommand(getDeleteQuery(obj, key), connection).ExecuteReader();
+            return dataReader.Read();
+        }
+
 
         private static List<T> processResponse<T>(SqlDataReader dataReader)
         {
@@ -47,11 +61,26 @@ namespace EIS
             while (dataReader.Read())
             {
                 T obj = (T) Activator.CreateInstance(type);
-                Array.ForEach(
-                    type.GetFields(), 
-                    fieldInfo => fieldInfo.SetValue(
-                        obj,
-                        dataReader.GetValue(dataReader.GetOrdinal(fieldInfo.Name))));
+                foreach (FieldInfo info in type.GetFields())
+                {
+                    string data = dataReader.GetValue(dataReader.GetOrdinal(info.Name)).ToString();
+                    string datatype = info.FieldType.Name.ToString();
+
+                    switch (datatype)
+                    {
+                        case "String":
+                            info.SetValue(obj, data);
+                            break;
+                        case "Int32":
+                            info.SetValue(obj, Int32.Parse(data));
+                            break;
+                        case "DateTime":
+                            info.SetValue(obj, DateTime.Parse(data));
+                            break;
+                        default:
+                            throw new Exception("Unhanded Data Type Found: " +  datatype);
+                    }
+                }
 
                 dataList.Add(obj);
             }
@@ -60,13 +89,6 @@ namespace EIS
             return dataList;
         }
 
-        //private static string getSelectQuery<T>(T obj)
-        //{
-        //    Type type = typeof(T);
-
-        //    StringBuilder builder = new StringBuilder();
-        //    builder.Append("Insert Into ");
-        //}
 
         private static string getInsertQuery<T>(T obj)
         {
@@ -91,6 +113,88 @@ namespace EIS
             }
             builder.Remove(builder.Length-1, 1);
             builder.Append(");");
+
+            return builder.ToString();
+        }
+
+        private static string getUpdateQuery<T>(T obj, string key)
+        {
+            Type type = typeof(T);
+            string keyValue = "";
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Update ");
+            builder.Append(type.Name);
+            builder.Append(" Set ");
+      
+            foreach (FieldInfo info in type.GetFields())
+            {
+                string datatype = info.FieldType.Name.ToString();
+                builder.Append(info.Name);
+                builder.Append(" = ");
+                switch (datatype)
+                {
+                    case "String":
+                    case "DateTime":  
+                        builder.Append("'" + info.GetValue(obj) + "',");
+                        if (info.Name.Equals(key))  keyValue = "'" + info.GetValue(obj) + "'";
+                        break;
+                    case "Int32":
+                        builder.Append(info.GetValue(obj) + ",");
+                        if (info.Name.Equals(key))  keyValue = info.GetValue(obj).ToString();
+                        break;
+                    default:
+                        throw new Exception("Unhanded Data Type Found: " + datatype);
+                }
+            }
+            builder.Remove(builder.Length - 1, 1);
+
+            builder.Append(" Where ");
+            builder.Append(key);
+            builder.Append(" = ");
+            builder.Append(keyValue);
+            builder.Append(";");
+
+            return builder.ToString();
+        }
+
+        private static string getDeleteQuery<T>(T obj, string key)
+        {
+            Type type = typeof(T);
+            string keyValue = "";
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Delete From");
+            builder.Append(type.Name);
+            builder.Append(" Set ");
+
+            foreach (FieldInfo info in type.GetFields())
+            {
+                string datatype = info.FieldType.Name.ToString();
+                builder.Append(info.Name);
+                builder.Append(" = ");
+                switch (datatype)
+                {
+                    case "String":
+                    case "DateTime":
+                        builder.Append("'" + info.GetValue(obj) + "',");
+                        if (info.Name.Equals(key)) keyValue = "'" + info.GetValue(obj) + "'";
+                        break;
+                    case "Int32":
+                        builder.Append(info.GetValue(obj) + ",");
+                        if (info.Name.Equals(key)) keyValue = info.GetValue(obj).ToString();
+                        break;
+                    default:
+                        throw new Exception("Unhanded Data Type Found: " + datatype);
+                }
+            }
+            builder.Remove(builder.Length - 1, 1);
+
+            builder.Append(" Where ");
+            builder.Append(key);
+            builder.Append(" = ");
+            builder.Append(keyValue);
+            builder.Append(";");
 
             return builder.ToString();
         }
