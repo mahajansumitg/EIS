@@ -8,9 +8,9 @@ namespace EIS.model
 {
     public class Login
     {
-        public string user_name;
-        public string pswd;
-        public string role;
-        public string emp_id;
+        public string user_name { get; set; }
+        public string pswd { get; set; }
+        public string role { get; set; }
+        public string emp_id { get; set; }
     }
 }

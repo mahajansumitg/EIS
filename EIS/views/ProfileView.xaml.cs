@@ -44,9 +44,9 @@ namespace EIS.views
             LastName.Text = empInfo.last_name;
             EmailId.Text = empInfo.email_id;
             EmpId.Text = empInfo.emp_id;
-            DOB.Text = empInfo.dob.ToString().Substring(0, 9);
-            DOJ.Text = empInfo.doj.ToString().Substring(0,9);
-            DOL.Text = empInfo.dol.ToString().Substring(0, 9);
+            DOB.Text = empInfo.dob.ToString().Substring(0, 10);
+            DOJ.Text = empInfo.doj.ToString().Substring(0,10);
+            DOL.Text = empInfo.dol.ToString().Substring(0, 10);
             City.Text = empInfo.city;
             Address.Text = empInfo.address;
             Dept.Text = empInfo.department;
@@ -76,7 +76,7 @@ namespace EIS.views
             else
                  Connection.setData(empInfo);
             MessageBox.Show("Profile successfully uodated");
-    }
+        }
         
     }
 }

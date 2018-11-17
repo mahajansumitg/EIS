@@ -46,7 +46,7 @@ namespace EIS.Pages
 
         private void logout(object sender, RoutedEventArgs e)
         {
-            Connection.close();
+           // Connection.close();
         }
 
         private void switchToDashBoard(object sender, RoutedEventArgs e)

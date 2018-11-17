@@ -1,4 +1,5 @@
 ﻿using System;
+using EIS.model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace EIS.views
         public DashBoardView()
         {
             InitializeComponent();
+            InitializePaginaion();
+        }
+
+        private void InitializePaginaion()
+        {
+            string findQuery = "select * from EmpInfo;";
+            List<EmpInfo> EmpInfoList = Connection.getData<EmpInfo>(findQuery);
+            lstEmpInfo.DataContext = EmpInfoList;
         }
     }
 }

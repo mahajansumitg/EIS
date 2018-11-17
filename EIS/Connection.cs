@@ -35,21 +35,28 @@ namespace EIS
         {
             connection.Open();
             SqlDataReader dataReader = new SqlCommand(getInsertQuery(obj), connection).ExecuteReader();
-            return dataReader.Read();
+            return returnAndClose(dataReader);
         }
 
         public static Boolean updateData<T>(T obj, String key)
         {
             connection.Open();
             SqlDataReader dataReader = new SqlCommand(getUpdateQuery(obj, key), connection).ExecuteReader();
-            return dataReader.Read();
+            return returnAndClose(dataReader);
         }
 
         public static Boolean deleteData<T>(T obj, String key)
         {
             connection.Open();
             SqlDataReader dataReader = new SqlCommand(getDeleteQuery(obj, key), connection).ExecuteReader();
-            return dataReader.Read();
+            return returnAndClose(dataReader);
+        }
+
+        private static Boolean returnAndClose(SqlDataReader dataReader)
+        {
+            Boolean status = dataReader.Read();
+            connection.Close();
+            return status;
         }
 
 
@@ -61,10 +68,10 @@ namespace EIS
             while (dataReader.Read())
             {
                 T obj = (T) Activator.CreateInstance(type);
-                foreach (FieldInfo info in type.GetFields())
+                foreach (PropertyInfo info in type.GetProperties())
                 {
                     string data = dataReader.GetValue(dataReader.GetOrdinal(info.Name)).ToString();
-                    string datatype = info.FieldType.Name.ToString();
+                    string datatype = info.PropertyType.Name.ToString();
 
                     switch (datatype)
                     {
@@ -99,17 +106,26 @@ namespace EIS
             builder.Append(type.Name);
 
             builder.Append(" (");
-            Array.ForEach( type.GetFields(),fieldInfo => builder.Append(fieldInfo.Name + ","));
+            Array.ForEach( type.GetProperties(),info => builder.Append(info.Name + ","));
             builder.Remove(builder.Length - 1, 1);
             builder.Append(") ");
 
             builder.Append(" Values(");
-            foreach (FieldInfo info in type.GetFields())
+            foreach (PropertyInfo info in type.GetProperties())
             {
-                if (info.FieldType.Equals(typeof(string)))
-                    builder.Append("'" + info.GetValue(obj) + "',");
-                else
-                    builder.Append(info.GetValue(obj) + ",");
+                string datatype = info.PropertyType.Name;
+                switch (datatype)
+                {
+                    case "String":
+                    case "DateTime":
+                        builder.Append("'" + info.GetValue(obj) + "',");
+                        break;
+                    case "Int32":
+                        builder.Append(info.GetValue(obj) + ",");
+                        break;
+                    default:
+                        throw new Exception("Unhanded Data Type Found: " + datatype);
+                }
             }
             builder.Remove(builder.Length-1, 1);
             builder.Append(");");
@@ -127,9 +143,9 @@ namespace EIS
             builder.Append(type.Name);
             builder.Append(" Set ");
       
-            foreach (FieldInfo info in type.GetFields())
+            foreach (PropertyInfo info in type.GetProperties())
             {
-                string datatype = info.FieldType.Name.ToString();
+                string datatype = info.PropertyType.Name.ToString();
                 builder.Append(info.Name);
                 builder.Append(" = ");
                 switch (datatype)
@@ -166,30 +182,6 @@ namespace EIS
             StringBuilder builder = new StringBuilder();
             builder.Append("Delete From");
             builder.Append(type.Name);
-            builder.Append(" Set ");
-
-            foreach (FieldInfo info in type.GetFields())
-            {
-                string datatype = info.FieldType.Name.ToString();
-                builder.Append(info.Name);
-                builder.Append(" = ");
-                switch (datatype)
-                {
-                    case "String":
-                    case "DateTime":
-                        builder.Append("'" + info.GetValue(obj) + "',");
-                        if (info.Name.Equals(key)) keyValue = "'" + info.GetValue(obj) + "'";
-                        break;
-                    case "Int32":
-                        builder.Append(info.GetValue(obj) + ",");
-                        if (info.Name.Equals(key)) keyValue = info.GetValue(obj).ToString();
-                        break;
-                    default:
-                        throw new Exception("Unhanded Data Type Found: " + datatype);
-                }
-            }
-            builder.Remove(builder.Length - 1, 1);
-
             builder.Append(" Where ");
             builder.Append(key);
             builder.Append(" = ");
