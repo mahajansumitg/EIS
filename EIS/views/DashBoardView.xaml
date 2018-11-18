@@ -9,7 +9,7 @@
     <Grid Background="White" Margin="30">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" MaxHeight="30"/>
         </Grid.RowDefinitions>
         <ListView Name="lstEmpInfo" Grid.Row="0" ItemsSource="{Binding}" Margin="10">
             <ListView.View>
@@ -28,7 +28,7 @@
                     <GridViewColumn Header="Employee Id" DisplayMemberBinding="{Binding Path=emp_id}"></GridViewColumn>
                     <GridViewColumn Header="Date of Birth" DisplayMemberBinding="{Binding Path=dob}"></GridViewColumn>
                     <GridViewColumn Header="Date of Joining" DisplayMemberBinding="{Binding Path=doj}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Living" DisplayMemberBinding="{Binding Path=dol}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Leaving" DisplayMemberBinding="{Binding Path=dol}"></GridViewColumn>
                     <GridViewColumn Header="City" DisplayMemberBinding="{Binding Path=city}"></GridViewColumn>
                     <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=address}"></GridViewColumn>
                     <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=department}"></GridViewColumn>
@@ -57,7 +57,7 @@
                 </DockPanel>
 
                 <Button Grid.Column="1" Content="&lt;" Click="prevPage"/>
-                <TextBox Name="CurrentPage" Grid.Column=" 2" Text="1" HorizontalAlignment="Center" TextChanged="pageChanged"/>
+                <TextBox Width="40" TextAlignment="Center" Name="CurrentPage" Grid.Column=" 2" Text="1" HorizontalAlignment="Center" TextChanged="pageChanged"/>
                 <Button Grid.Column="3" Content="&gt;" Click="nextPage"/>
             </Grid>
 

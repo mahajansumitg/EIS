@@ -1,5 +1,4 @@
 ﻿using EIS.model;
-using EIS.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EIS
+namespace EIS.Pages
 {
-    public partial class LoginWindow : Window
+    /// <summary>
+    /// Interaction logic for LoginPage.xaml
+    /// </summary>
+    public partial class LoginPage : Page
     {
-        public LoginWindow()
+        Window window;
+
+        public LoginPage(Window window)
         {
+            this.window = window;
             InitializeComponent();
         }
 
@@ -30,7 +35,7 @@ namespace EIS
             List<Login> loginList = Connection.getData<Login>(loginQuery);
 
             if (loginList.Count() > 0 && loginList.First().pswd == pswd.Password)
-                this.Content = new MainPage(loginList.First(), this);
+                window.Content = new MainPage(loginList.First(), window);
             else
                 MessageBox.Show("Entered user_name or password is incorrect");
         }

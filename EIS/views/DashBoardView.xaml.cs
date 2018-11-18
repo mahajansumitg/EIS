@@ -30,6 +30,11 @@ namespace EIS.views
         public int currentPage {get; set;}
         public int lastPage { get; set; }
 
+        public DashBoardView()
+        {
+            InitializeComponent();
+        }
+
         public DashBoardView(MainPage parent)
         {
             InitializeClassVariables(parent);

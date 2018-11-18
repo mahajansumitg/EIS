@@ -19,41 +19,42 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"  MaxHeight="30"/>
+            <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Background="White" Grid.Row="0" Grid.Column="0">
-            <Label  Content="Name: "/>
-            <Label  x:Name="userName"/>
-            <Label  Content="Id: "/>
-            <Label  x:Name="userId"/>
-            <Label  Content="Role: "/>
-            <Label  x:Name="userRole"/>
-            <WrapPanel  HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button  x:Name="dashButtton" Visibility="Hidden" Content="DashBoard" Click="switchToDashBoard" HorizontalAlignment="Left"/>
-                <Button  x:Name="formButton" Visibility="Hidden" Content="Form" Click="switchToForm" HorizontalAlignment="Center"/>
-                <Button Content="Log Out" Click="logout" HorizontalAlignment="Right"/>
-            </WrapPanel>
-        </DockPanel>
+        <Grid Name="DockGrid" Background="White" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                
+                <ColumnDefinition Width="2*"/>
+                
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" HorizontalAlignment="Center" Content="Id: "/>
+            <Label Grid.Column="1" HorizontalAlignment="Left" Content ="{Binding emp_id}" x:Name="userId"/>
+
+            <Label Grid.Column="2" HorizontalAlignment="Center" Content="Name: "/>
+            <Label Grid.Column="3" HorizontalAlignment="Left" Content ="{Binding user_name}" x:Name="userName"/>
+
+            <Label Grid.Column="4" HorizontalAlignment="Center" Content="User Role: "/>
+            <Label Grid.Column="5" HorizontalAlignment="Left" Content ="{Binding role}" x:Name="userRole"/>
+
+            <Button Grid.Column="7" Margin="1" HorizontalAlignment="Stretch" x:Name="dashButtton" Visibility="Hidden" Content="DashBoard" Click="switchToDashBoard"/>
+            <Button Grid.Column="8" Margin="1" HorizontalAlignment="Stretch" x:Name="formButton" Visibility="Hidden" Content="Form" Click="switchToForm"/>
+            <Button Grid.Column="9" Margin="1" HorizontalAlignment="Stretch" Content="Log Out" Click="logout"/>
+        </Grid>
         
-        <ContentControl Grid.Row="1" Grid.Column="1" Grid.RowSpan="14" Content="{Binding}"/>
+        <ContentControl Grid.Row="2" Content="{Binding}"/>
     </Grid>
 </Page>

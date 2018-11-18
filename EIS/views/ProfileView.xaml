@@ -24,16 +24,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <Label Content="Name" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-        <Label Content="Email Id" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-        <Label Content="Emp Id" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-        <Label Content="DOB" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-        <Label Content="DOJ" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
-        <Label Content="DOL" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-        <Label Content="City" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
-        <Label Content="Address" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
-        <Label Content="Department" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
-        <Label Content="Salary" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="Name        :" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Email Id    :" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Emp Id      :" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="DOB         :" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="DOJ         :" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="DOL         :" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="City        :" HorizontalAlignment="Center"  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="Address     :" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Department  :" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
+        <Label Content="Salary      :" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
 
         <TextBox Name="FirstName"  TextAlignment="Center" Text="First Name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
         <TextBox Name="MiddleName" Text="MiddleName" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>

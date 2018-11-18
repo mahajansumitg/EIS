@@ -23,16 +23,14 @@ namespace EIS.Pages
     public partial class MainPage : Page
     {
         Login user;
-        LoginWindow parent;
+        Window window;
 
-        public MainPage(Login user, LoginWindow parent)
+        public MainPage(Login user, Window window)
         {
             InitializeComponent();
-            this.parent = parent;
+            this.window = window;
             this.user = user;
-            userName.Content = user.user_name;
-            userId.Content = user.emp_id;
-            userRole.Content = user.role;
+            DockGrid.DataContext = this.user;
 
             if (user.role.Equals("admin"))
             {
@@ -46,7 +44,7 @@ namespace EIS.Pages
 
         private void logout(object sender, RoutedEventArgs e)
         {
-            parent.Content =  new LoginWindow();
+            window.Content =  new LoginPage(window);
         }
 
         private void switchToDashBoard(object sender, RoutedEventArgs e)

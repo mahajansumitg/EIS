@@ -24,6 +24,12 @@ namespace EIS.views
     {
         Boolean isUserPresent = false;
         MainPage parent;
+
+        public ProfileView()
+        {
+            InitializeComponent();
+        }
+
         public ProfileView(EmpInfo empInfo, MainPage parent)
         {
             this.parent = parent;
