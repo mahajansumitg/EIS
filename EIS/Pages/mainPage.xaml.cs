@@ -35,7 +35,6 @@ namespace EIS.Pages
             if (user.role.Equals("admin"))
             {
                 DataContext = new DashBoardView(this);
-                dashButtton.Visibility = System.Windows.Visibility.Visible;
                 formButton.Visibility = System.Windows.Visibility.Visible;
             }
             else

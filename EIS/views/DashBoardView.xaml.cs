@@ -26,7 +26,7 @@ namespace EIS.views
         private EmpInfo CurrentEmployee;
         private MainPage parent;
 
-        private static int RecordsPerPage = 1;
+        private static int RecordsPerPage = 5;
         public int currentPage {get; set;}
         public int lastPage { get; set; }
 
