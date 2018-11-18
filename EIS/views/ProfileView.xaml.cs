@@ -1,4 +1,5 @@
 ﻿using EIS.model;
+using EIS.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,13 @@ namespace EIS.views
     public partial class ProfileView : UserControl
     {
         Boolean isUserPresent = false;
+        MainPage parent;
+        public ProfileView(EmpInfo empInfo, MainPage parent)
+        {
+            this.parent = parent;
+            InitializeComponent();
+            initializeForm(empInfo);
+        }
 
         public ProfileView(Login user)
         {
@@ -29,23 +37,29 @@ namespace EIS.views
             initializeForm(user);
         }
 
-        private void initializeForm(Login user){
+        private void initializeForm(Login user)
+        {
             EmpId.Text = user.emp_id;
             VendorGrid.Visibility = user.role.Equals("contractor") ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 
             string findQuery = "select * from EmpInfo where emp_id = '" + user.emp_id + "'";
             List<EmpInfo> EmpInfoList = Connection.getData<EmpInfo>(findQuery);
+
             if (EmpInfoList.Count == 0) return;
 
+            initializeForm(EmpInfoList.First());
+        }
+        private void initializeForm(EmpInfo empInfo)
+        {
             this.isUserPresent = true;
-            EmpInfo empInfo = EmpInfoList.First();
+
             FirstName.Text = empInfo.first_name;
             MiddleName.Text = empInfo.middle_name;
             LastName.Text = empInfo.last_name;
             EmailId.Text = empInfo.email_id;
             EmpId.Text = empInfo.emp_id;
             DOB.Text = empInfo.dob.ToString().Substring(0, 10);
-            DOJ.Text = empInfo.doj.ToString().Substring(0,10);
+            DOJ.Text = empInfo.doj.ToString().Substring(0, 10);
             DOL.Text = empInfo.dol.ToString().Substring(0, 10);
             City.Text = empInfo.city;
             Address.Text = empInfo.address;
@@ -68,15 +82,18 @@ namespace EIS.views
             empInfo.city = City.Text;
             empInfo.address = Address.Text;
             empInfo.department = Dept.Text;
-            empInfo.salary =  Int32.Parse(Salary.Text);
+            empInfo.salary = Int32.Parse(Salary.Text);
             empInfo.vendor = Vendor.Text;
 
-            if(isUserPresent)
+            if (isUserPresent)
                 Connection.updateData(empInfo, "emp_id");
             else
-                 Connection.setData(empInfo);
+                Connection.setData(empInfo);
+
             MessageBox.Show("Profile successfully uodated");
+
+            if (parent != null) parent.DataContext = new DashBoardView(parent);
         }
-        
+
     }
 }

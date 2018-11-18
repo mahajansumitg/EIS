@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace EIS.model
 {
-    class EmpInfo
+    public class EmpInfo
     {
         public string first_name { get; set; }
         public string middle_name { get; set; }

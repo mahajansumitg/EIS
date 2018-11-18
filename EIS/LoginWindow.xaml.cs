@@ -30,7 +30,7 @@ namespace EIS
             List<Login> loginList = Connection.getData<Login>(loginQuery);
 
             if (loginList.Count() > 0 && loginList.First().pswd == pswd.Password)
-                this.Content = new mainPage(loginList.First(), this);
+                this.Content = new MainPage(loginList.First(), this);
             else
                 MessageBox.Show("Entered user_name or password is incorrect");
         }

@@ -21,7 +21,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Name="vendorRow"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         
         <Label Content="Name" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>

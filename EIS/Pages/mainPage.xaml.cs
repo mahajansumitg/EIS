@@ -20,12 +20,12 @@ namespace EIS.Pages
     /// <summary>
     /// Interaction logic for mainPage.xaml
     /// </summary>
-    public partial class mainPage : Page
+    public partial class MainPage : Page
     {
         Login user;
         LoginWindow parent;
 
-        public mainPage(Login user, LoginWindow parent)
+        public MainPage(Login user, LoginWindow parent)
         {
             InitializeComponent();
             this.parent = parent;
@@ -36,7 +36,7 @@ namespace EIS.Pages
 
             if (user.role.Equals("admin"))
             {
-                DataContext = new DashBoardView();
+                DataContext = new DashBoardView(this);
                 dashButtton.Visibility = System.Windows.Visibility.Visible;
                 formButton.Visibility = System.Windows.Visibility.Visible;
             }
@@ -46,14 +46,14 @@ namespace EIS.Pages
 
         private void logout(object sender, RoutedEventArgs e)
         {
-           // Connection.close();
+            parent.Content =  new LoginWindow();
         }
 
         private void switchToDashBoard(object sender, RoutedEventArgs e)
         {
             formButton.Visibility = System.Windows.Visibility.Visible;
             dashButtton.Visibility = System.Windows.Visibility.Hidden;
-            DataContext = new DashBoardView();
+            DataContext = new DashBoardView(this);
         }
 
         private void switchToForm(object sender, RoutedEventArgs e)

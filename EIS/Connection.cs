@@ -45,10 +45,10 @@ namespace EIS
             return returnAndClose(dataReader);
         }
 
-        public static Boolean deleteData<T>(T obj, String key)
+        public static Boolean deleteData<T>(String key, string value)
         {
             connection.Open();
-            SqlDataReader dataReader = new SqlCommand(getDeleteQuery(obj, key), connection).ExecuteReader();
+            SqlDataReader dataReader = new SqlCommand(getDeleteQuery<T>(key, value), connection).ExecuteReader();
             return returnAndClose(dataReader);
         }
 
@@ -174,18 +174,17 @@ namespace EIS
             return builder.ToString();
         }
 
-        private static string getDeleteQuery<T>(T obj, string key)
+        private static string getDeleteQuery<T>(string key, string value)
         {
             Type type = typeof(T);
-            string keyValue = "";
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Delete From");
+            builder.Append("Delete From ");
             builder.Append(type.Name);
             builder.Append(" Where ");
             builder.Append(key);
             builder.Append(" = ");
-            builder.Append(keyValue);
+            builder.Append("'" + value + "'");
             builder.Append(";");
 
             return builder.ToString();
