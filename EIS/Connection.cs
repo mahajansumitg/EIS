@@ -11,15 +11,28 @@ namespace EIS
 {
     static class Connection
     {
-        private static string USER_ID = "sumit";
-        private static string PSWD = "Mahajan123@";
-        private static string DATA_SOURCE = "sumit-mahajan.database.windows.net";
+       // Local MySQL 
+        //private static string USER_ID = "";
+        //private static string PSWD = "";
+        //private static string DATA_SOURCE = "(localdb)\\MSSQLLocalDB";
+        //private static string CATALOG = "Employee_Information_System";
+
+        // Local SQL Server 
+        private static string USER_ID = "";
+        private static string PSWD = "";
+        private static string DATA_SOURCE = "(localdb)\\ProjectsV13";
         private static string CATALOG = "Employee_Information_System";
+
+       // Microsift Azure Online
+        //private static string USER_ID = "sumit";
+        //private static string PSWD = "Mahajan123@";
+        //private static string DATA_SOURCE = "sumit-mahajan.database.windows.net";
+        //private static string CATALOG = "Employee_Information_System";
 
         private static SqlConnection connection = new SqlConnection(getConnectionString());
 
 
-
+   
         public static void close()
         {
             connection.Close();
