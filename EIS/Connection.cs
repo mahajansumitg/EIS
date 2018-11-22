@@ -5,7 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+
+using static EIS.model.EmpInfo;
 
 namespace EIS
 {
@@ -30,8 +31,6 @@ namespace EIS
         //private static string CATALOG = "Employee_Information_System";
 
         private static SqlConnection connection = new SqlConnection(getConnectionString());
-
-
    
         public static void close()
         {
@@ -83,6 +82,8 @@ namespace EIS
                 T obj = (T) Activator.CreateInstance(type);
                 foreach (PropertyInfo info in type.GetProperties())
                 {
+                    if (info.Name.Contains("ignore")) continue;
+
                     string data = dataReader.GetValue(dataReader.GetOrdinal(info.Name)).ToString();
                     string datatype = info.PropertyType.Name.ToString();
 
@@ -126,12 +127,16 @@ namespace EIS
             builder.Append(" Values(");
             foreach (PropertyInfo info in type.GetProperties())
             {
+                if (info.Name.Contains("ignore")) continue;
+
                 string datatype = info.PropertyType.Name;
                 switch (datatype)
                 {
                     case "String":
-                    case "DateTime":
                         builder.Append("'" + info.GetValue(obj) + "',");
+                        break;
+                    case "DateTime":
+                        builder.Append("'" + GetFormatedDate((DateTime)info.GetValue(obj)) + "',");
                         break;
                     case "Int32":
                         builder.Append(info.GetValue(obj) + ",");
@@ -158,15 +163,21 @@ namespace EIS
       
             foreach (PropertyInfo info in type.GetProperties())
             {
+                if (info.Name.Contains("ignore")) continue;
+
                 string datatype = info.PropertyType.Name.ToString();
                 builder.Append(info.Name);
                 builder.Append(" = ");
                 switch (datatype)
                 {
                     case "String":
-                    case "DateTime":  
                         builder.Append("'" + info.GetValue(obj) + "',");
-                        if (info.Name.Equals(key))  keyValue = "'" + info.GetValue(obj) + "'";
+                        if (info.Name.Equals(key)) keyValue = "'" + info.GetValue(obj) + "'";
+                        break;
+                    case "DateTime":
+                        string date = GetFormatedDate((DateTime)info.GetValue(obj));
+                        builder.Append("'" + date + "',");
+                        if (info.Name.Equals(key))  keyValue = "'" + date + "'";
                         break;
                     case "Int32":
                         builder.Append(info.GetValue(obj) + ",");

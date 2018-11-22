@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using static EIS.model.EmpInfo;
+
 namespace EIS.views
 {
     /// <summary>
@@ -22,8 +24,9 @@ namespace EIS.views
     /// </summary>
     public partial class ProfileView : UserControl
     {
-        Boolean isUserPresent = false;
+        Boolean isUserPresent;
         MainPage parent;
+        EmpInfo empInfo = new EmpInfo();
 
         public ProfileView()
         {
@@ -33,70 +36,39 @@ namespace EIS.views
         public ProfileView(EmpInfo empInfo, MainPage parent)
         {
             this.parent = parent;
+            this.empInfo = empInfo;
+            this.isUserPresent = true;
+
             InitializeComponent();
-            initializeForm(empInfo);
+            FormGrid.DataContext = this.empInfo;
         }
 
         public ProfileView(Login user)
         {
+            empInfo.emp_id = user.emp_id;
             InitializeComponent();
-            initializeForm(user);
-        }
 
-        private void initializeForm(Login user)
-        {
-            EmpId.Text = user.emp_id;
             VendorGrid.Visibility = user.role.Equals("contractor") ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 
             string findQuery = "select * from EmpInfo where emp_id = '" + user.emp_id + "'";
             List<EmpInfo> EmpInfoList = Connection.getData<EmpInfo>(findQuery);
 
-            if (EmpInfoList.Count == 0) return;
+            isUserPresent = (EmpInfoList.Count != 0);
 
-            initializeForm(EmpInfoList.First());
-        }
-        private void initializeForm(EmpInfo empInfo)
-        {
-            this.isUserPresent = true;
 
-            FirstName.Text = empInfo.first_name;
-            MiddleName.Text = empInfo.middle_name;
-            LastName.Text = empInfo.last_name;
-            EmailId.Text = empInfo.email_id;
-            EmpId.Text = empInfo.emp_id;
-            DOB.Text = empInfo.dob.ToString().Substring(0, 10);
-            DOJ.Text = empInfo.doj.ToString().Substring(0, 10);
-            DOL.Text = empInfo.dol.ToString().Substring(0, 10);
-            City.Text = empInfo.city;
-            Address.Text = empInfo.address;
-            Dept.Text = empInfo.department;
-            Salary.Text = empInfo.salary.ToString();
-            Vendor.Text = empInfo.vendor;
+            if(isUserPresent) empInfo = EmpInfoList.First();
+
+            FormGrid.DataContext = empInfo;
         }
 
         private void updateProfile(object sender, RoutedEventArgs e)
         {
-            EmpInfo empInfo = new EmpInfo();
-            empInfo.first_name = FirstName.Text;
-            empInfo.middle_name = MiddleName.Text;
-            empInfo.last_name = LastName.Text;
-            empInfo.email_id = EmailId.Text;
-            empInfo.emp_id = EmpId.Text;
-            empInfo.dob = DateTime.Parse(DOB.Text);
-            empInfo.doj = DateTime.Parse(DOJ.Text);
-            empInfo.dol = DateTime.Parse(DOL.Text);
-            empInfo.city = City.Text;
-            empInfo.address = Address.Text;
-            empInfo.department = Dept.Text;
-            empInfo.salary = Int32.Parse(Salary.Text);
-            empInfo.vendor = Vendor.Text;
-
             if (isUserPresent)
                 Connection.updateData(empInfo, "emp_id");
             else
                 Connection.setData(empInfo);
 
-            MessageBox.Show("Profile successfully uodated");
+            MessageBox.Show("Profile successfully updated");
 
             if (parent != null) parent.DataContext = new DashBoardView(parent);
         }

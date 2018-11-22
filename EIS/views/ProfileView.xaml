@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:EIS.views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Margin="30">
+    <Grid Name="FormGrid" Background="White" Margin="30" DataContext="{Binding}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -34,20 +34,21 @@
         <Label Content="Address     :" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
         <Label Content="Department  :" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
         <Label Content="Salary      :" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+        
+        <TextBox Text="{Binding Path=first_name, Mode=TwoWay}"  TextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=middle_name, Mode=TwoWay}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=last_name, Mode=TwoWay}" TextAlignment="Center" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
 
-        <TextBox Name="FirstName"  TextAlignment="Center" Text="First Name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="MiddleName" Text="MiddleName" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="LastName" Text="LastName" TextAlignment="Center" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=email_id, Mode=TwoWay}" TextAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=emp_id, Mode=TwoWay}" IsReadOnly="True" TextAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=city, Mode=TwoWay}" TextAlignment="Center" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=address, Mode=TwoWay}" TextAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=department, Mode=TwoWay}" TextAlignment="Center" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Path=vendor, Mode=TwoWay}" TextAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
 
-        <TextBox Name="EmailId" TextAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="EmpId" IsReadOnly="True" TextAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="DOB" TextAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center"    VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="DOJ" TextAlignment="Center" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center"    VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="DOL" TextAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="City" TextAlignment="Center" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="Address" TextAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="Dept" TextAlignment="Center" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Name="Salary" TextAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <DatePicker Text="{Binding Path=dob_ignore, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker Text="{Binding Path=doj_ignore, Mode=TwoWay}" Grid.Row="3" Grid.Column="3" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker Text="{Binding Path=dol_ignore, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
         <Grid Name="VendorGrid" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>

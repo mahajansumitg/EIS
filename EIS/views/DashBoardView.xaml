@@ -26,9 +26,9 @@
                     <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding Path=last_name}"></GridViewColumn>
                     <GridViewColumn Header="Email Id" DisplayMemberBinding="{Binding Path=email_id}"></GridViewColumn>
                     <GridViewColumn Header="Employee Id" DisplayMemberBinding="{Binding Path=emp_id}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Birth" DisplayMemberBinding="{Binding Path=dob}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Joining" DisplayMemberBinding="{Binding Path=doj}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Leaving" DisplayMemberBinding="{Binding Path=dol}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Birth" DisplayMemberBinding="{Binding Path=dob_ignore}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Joining" DisplayMemberBinding="{Binding Path=doj_ignore}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Leaving" DisplayMemberBinding="{Binding Path=dol_ignore}"></GridViewColumn>
                     <GridViewColumn Header="City" DisplayMemberBinding="{Binding Path=city}"></GridViewColumn>
                     <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=address}"></GridViewColumn>
                     <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=department}"></GridViewColumn>
