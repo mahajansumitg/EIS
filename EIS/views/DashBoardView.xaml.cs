@@ -22,9 +22,15 @@ namespace EIS.views
     /// </summary>
     public partial class DashBoardView : UserControl
     {
+        List<EmpInfo> empInfoList;
+        
         private Dictionary<int, List<EmpInfo>> empInfoDict;
         private EmpInfo CurrentEmployee;
         private MainPage parent;
+
+        private string empId_search { get; set; }
+        private string dob_search { get; set; }
+        private string doj_search { get; set; }
 
         private static int RecordsPerPage = 5;
         public int currentPage {get; set;}
@@ -48,18 +54,19 @@ namespace EIS.views
             this.currentPage = 1;
             this.lastPage = 1;
             empInfoDict = new Dictionary<int, List<EmpInfo>>();
+            empInfoList = new List<EmpInfo>();
         }
 
         private void InitializePaginaion()
         {
             string findQuery = "select * from EmpInfo;";
-            List<EmpInfo> empInfoList = Connection.getData<EmpInfo>(findQuery);
-            empInfoDict = getEmpInfoDictionary(empInfoList);
+            empInfoList = Connection.getData<EmpInfo>(findQuery);
+            SetEmpInfoDictionary(empInfoList);
             pagination.DataContext = this;
             setPageInListView();
         }
 
-        private Dictionary<int, List<EmpInfo>> getEmpInfoDictionary(List<EmpInfo> empInfoList)
+        private void SetEmpInfoDictionary(List<EmpInfo> empInfoList)
         {
             Dictionary<int, List<EmpInfo>> empInfoDict = new Dictionary<int, List<EmpInfo>>();
             int page = 1;
@@ -68,7 +75,7 @@ namespace EIS.views
                 empInfoDict.Add(page++, empInfoList.GetRange(i, Math.Min(empInfoList.Count - i, RecordsPerPage)));
             }
             lastPage = --page;
-            return empInfoDict;
+            this.empInfoDict = empInfoDict;
         }
 
         private void EmpChecked(object sender, RoutedEventArgs e)
@@ -121,6 +128,34 @@ namespace EIS.views
             empInfoDict.TryGetValue(currentPage, out temp);
             lstEmpInfo.DataContext = temp;
             CurrentPage.Text = currentPage.ToString();
+        }
+
+        private void search(object sender, RoutedEventArgs e)
+        {
+            List<EmpInfo> prevEmpInfoList = new List<EmpInfo>(empInfoList);           
+            List<EmpInfo> newEmpInfoList = new List<EmpInfo>(empInfoList);           
+
+            foreach (EmpInfo emp in empInfoList)
+            {
+                if (!String.IsNullOrEmpty(EmpIdSearch.Text) && !emp.emp_id.ToLower().Contains(EmpIdSearch.Text.ToLower())
+                    || !String.IsNullOrEmpty(DojSearch.Text) && emp.doj != DateTime.Parse(DojSearch.Text)
+                    || !String.IsNullOrEmpty(DolSearch.Text) && emp.dol != DateTime.Parse(DolSearch.Text))
+                    newEmpInfoList.Remove(emp);
+            }
+
+            SetEmpInfoDictionary(newEmpInfoList);
+            pagination.DataContext = this;
+            setPageInListView();
+            empInfoList = prevEmpInfoList;
+        }
+
+        private void clear(object sender, RoutedEventArgs e)
+        {
+            EmpIdSearch.Text = DojSearch.Text = DolSearch.Text = "";
+
+            SetEmpInfoDictionary(empInfoList);
+            pagination.DataContext = this;
+            setPageInListView();
         }
     }
 }

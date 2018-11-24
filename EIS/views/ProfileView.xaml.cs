@@ -2,11 +2,14 @@
 using EIS.Pages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Runtime.CompilerServices;
+
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -26,8 +29,9 @@ namespace EIS.views
     {
         Boolean isUserPresent;
         MainPage parent;
-        EmpInfo empInfo = new EmpInfo();
 
+        public EmpInfo empInfo = new EmpInfo();
+       
         public ProfileView()
         {
             InitializeComponent();
@@ -72,6 +76,6 @@ namespace EIS.views
 
             if (parent != null) parent.DataContext = new DashBoardView(parent);
         }
-
     }
+
 }

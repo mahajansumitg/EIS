@@ -21,7 +21,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="1" Background="#FFCAD652">
+        <Grid Grid.Row="1" Grid.Column="1" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>

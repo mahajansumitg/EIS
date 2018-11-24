@@ -6,12 +6,35 @@
              xmlns:local="clr-namespace:EIS.views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Margin="30">
+    <Grid Background="White" Margin="30" MinHeight="40">
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*" MaxHeight="30"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="1*" MaxHeight="30"/>
         </Grid.RowDefinitions>
-        <ListView Name="lstEmpInfo" Grid.Row="0" ItemsSource="{Binding}" Margin="10">
+        <Grid Name="searchBar" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Employee Id:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Column="2" Content="DOJ:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Column="4" Content="DOL:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <TextBox Grid.Column="1" Name="EmpIdSearch" TextAlignment="Center" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+            <DatePicker Grid.Column="3" Name="DojSearch" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <DatePicker Grid.Column="5" Name="DolSearch" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            
+            <Button Grid.Column="6" Content="Search" Click="search" Margin="5,2,5,2"/>
+            <Button Grid.Column="7" Content="Clear" Click="clear" Margin="5,2,5,2"/>
+        </Grid>
+        <ListView Name="lstEmpInfo" Grid.Row="1" ItemsSource="{Binding}" Margin="10">
             <ListView.View>
                 <GridView>
                     <GridViewColumn  Header="Select">
@@ -21,24 +44,24 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding Path=first_name}"></GridViewColumn>
-                    <GridViewColumn Header="Middle Name" DisplayMemberBinding="{Binding Path=middle_name}"></GridViewColumn>
-                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding Path=last_name}"></GridViewColumn>
-                    <GridViewColumn Header="Email Id" DisplayMemberBinding="{Binding Path=email_id}"></GridViewColumn>
-                    <GridViewColumn Header="Employee Id" DisplayMemberBinding="{Binding Path=emp_id}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Birth" DisplayMemberBinding="{Binding Path=dob_ignore}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Joining" DisplayMemberBinding="{Binding Path=doj_ignore}"></GridViewColumn>
-                    <GridViewColumn Header="Date of Leaving" DisplayMemberBinding="{Binding Path=dol_ignore}"></GridViewColumn>
-                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding Path=city}"></GridViewColumn>
-                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=address}"></GridViewColumn>
-                    <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=department}"></GridViewColumn>
-                    <GridViewColumn Header="Salary" DisplayMemberBinding="{Binding Path=salary}"></GridViewColumn>
-                    <GridViewColumn Header="Vendor" DisplayMemberBinding="{Binding Path=vendor}"></GridViewColumn>
+                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding Path=FirstName}"></GridViewColumn>
+                    <GridViewColumn Header="Middle Name" DisplayMemberBinding="{Binding Path=MiddleName}"></GridViewColumn>
+                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding Path=LastName}"></GridViewColumn>
+                    <GridViewColumn Header="Email Id" DisplayMemberBinding="{Binding Path=EmailId}"></GridViewColumn>
+                    <GridViewColumn Header="Employee Id" DisplayMemberBinding="{Binding Path=EmpId}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Birth" DisplayMemberBinding="{Binding Path=DOB}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Joining" DisplayMemberBinding="{Binding Path=DOJ}"></GridViewColumn>
+                    <GridViewColumn Header="Date of Leaving" DisplayMemberBinding="{Binding Path=DOL}"></GridViewColumn>
+                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding Path=City}"></GridViewColumn>
+                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}"></GridViewColumn>
+                    <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=Department}"></GridViewColumn>
+                    <GridViewColumn Header="Salary" DisplayMemberBinding="{Binding Path=Salary}"></GridViewColumn>
+                    <GridViewColumn Header="Vendor" DisplayMemberBinding="{Binding Path=Vendor}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <Grid Name="bottomBar" Grid.Row="1" Margin="0,2,0,2">
+        <Grid Name="bottomBar" Grid.Row="2" Margin="0,2,0,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>

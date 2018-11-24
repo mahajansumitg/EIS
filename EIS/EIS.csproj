@@ -73,12 +73,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="model\EmpInfo.cs" />
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation.cs" />
     <Compile Include="views\DashBoardView.xaml.cs">
       <DependentUpon>DashBoardView.xaml</DependentUpon>
     </Compile>

@@ -80,12 +80,10 @@ namespace EIS
             while (dataReader.Read())
             {
                 T obj = (T) Activator.CreateInstance(type);
-                foreach (PropertyInfo info in type.GetProperties())
+                foreach (FieldInfo info in type.GetFields())
                 {
-                    if (info.Name.Contains("ignore")) continue;
-
                     string data = dataReader.GetValue(dataReader.GetOrdinal(info.Name)).ToString();
-                    string datatype = info.PropertyType.Name.ToString();
+                    string datatype = info.FieldType.Name;
 
                     switch (datatype)
                     {
@@ -125,11 +123,9 @@ namespace EIS
             builder.Append(") ");
 
             builder.Append(" Values(");
-            foreach (PropertyInfo info in type.GetProperties())
+            foreach (FieldInfo info in type.GetFields())
             {
-                if (info.Name.Contains("ignore")) continue;
-
-                string datatype = info.PropertyType.Name;
+                string datatype = info.FieldType.Name;
                 switch (datatype)
                 {
                     case "String":
@@ -161,11 +157,9 @@ namespace EIS
             builder.Append(type.Name);
             builder.Append(" Set ");
       
-            foreach (PropertyInfo info in type.GetProperties())
+            foreach (FieldInfo info in type.GetFields())
             {
-                if (info.Name.Contains("ignore")) continue;
-
-                string datatype = info.PropertyType.Name.ToString();
+                string datatype = info.FieldType.Name.ToString();
                 builder.Append(info.Name);
                 builder.Append(" = ");
                 switch (datatype)

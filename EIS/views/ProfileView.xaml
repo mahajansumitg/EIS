@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EIS.views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Name="FormGrid" Background="White" Margin="30" DataContext="{Binding}">
+
+    <Grid Name="FormGrid" Background="White" Margin="30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -34,21 +34,21 @@
         <Label Content="Address     :" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
         <Label Content="Department  :" HorizontalAlignment="Center"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
         <Label Content="Salary      :" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-        
-        <TextBox Text="{Binding Path=first_name, Mode=TwoWay}"  TextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=middle_name, Mode=TwoWay}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=last_name, Mode=TwoWay}" TextAlignment="Center" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
 
-        <TextBox Text="{Binding Path=email_id, Mode=TwoWay}" TextAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=emp_id, Mode=TwoWay}" IsReadOnly="True" TextAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=city, Mode=TwoWay}" TextAlignment="Center" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=address, Mode=TwoWay}" TextAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=department, Mode=TwoWay}" TextAlignment="Center" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
-        <TextBox Text="{Binding Path=vendor, Mode=TwoWay}" TextAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[FirstName]}" TextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding MiddleName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[MiddleName]}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[LastName]}" TextAlignment="Center" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
 
-        <DatePicker Text="{Binding Path=dob_ignore, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <DatePicker Text="{Binding Path=doj_ignore, Mode=TwoWay}" Grid.Row="3" Grid.Column="3" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <DatePicker Text="{Binding Path=dol_ignore, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox Text="{Binding EmailId, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[EmailId]}" TextAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding EmpId, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[EmpId]}" IsReadOnly="True" TextAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding City, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[City]}" TextAlignment="Center" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Address, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[Address]}" TextAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Department, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[Department]}" TextAlignment="Center" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+        <TextBox Text="{Binding Salary, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[Salary]}" TextAlignment="Center" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+
+        <DatePicker Text="{Binding DOB, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[DOB]}" Grid.Row="3" Grid.Column="1" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker Text="{Binding DOJ, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[DOJ]}" Grid.Row="3" Grid.Column="3" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker Text="{Binding DOL, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[DOL]}" Grid.Row="4" Grid.Column="1" SelectedDateFormat="Short" VerticalAlignment="Center" HorizontalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
         <Grid Name="VendorGrid" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -59,9 +59,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
                 <Label Name = "VendorLabel" Content="Vendor" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Name="Vendor" TextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
+            <TextBox Text="{Binding Vendor, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{Binding ErrorCollection[Vendor]}"  TextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" Height="20" Width="120"/>
         </Grid>
 
-        <Button x:Name="Submit" Content="Update Profile" Grid.Column="1"  Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center" Width="150" Click="updateProfile"/>
+        <Button x:Name="Submit" IsEnabled="{Binding SubmitEnabled, Mode=TwoWay}" Content="Update Profile" Grid.Column="1"  Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center" Width="150" Click="updateProfile"/>
     </Grid>
 </UserControl>
