@@ -51,8 +51,10 @@ namespace EIS.views
         {
             empInfo.emp_id = user.emp_id;
             InitializeComponent();
+            FormGrid.DataContext = empInfo;
 
             VendorGrid.Visibility = user.role.Equals("contractor") ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+            empInfo.IsContractor = user.role.Equals("contractor");
 
             string findQuery = "select * from EmpInfo where emp_id = '" + user.emp_id + "'";
             List<EmpInfo> EmpInfoList = Connection.getData<EmpInfo>(findQuery);
@@ -62,7 +64,6 @@ namespace EIS.views
 
             if(isUserPresent) empInfo = EmpInfoList.First();
 
-            FormGrid.DataContext = empInfo;
         }
 
         private void updateProfile(object sender, RoutedEventArgs e)

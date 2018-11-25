@@ -86,10 +86,15 @@ namespace EIS.model
         {
             get
             {
-                return GetFormatedDate(dob);
+                return dob.Year == 1 ? "" : GetFormatedDate(dob);
             }
             set
             {
+                if (value == "")
+                {
+                    OnPropertyChanged("DOB");
+                    return;
+                }
                 OnPropertyChanged(ref dob, DateTime.Parse(value));
             }
         }
@@ -98,10 +103,15 @@ namespace EIS.model
         {
             get
             {
-                return GetFormatedDate(doj);
+                return doj.Year == 1 ? "" : GetFormatedDate(doj);
             }
             set
             {
+                if (value == "")
+                {
+                    OnPropertyChanged("DOJ");
+                    return;
+                }
                 OnPropertyChanged(ref doj, DateTime.Parse(value));
             }
         }
@@ -110,19 +120,26 @@ namespace EIS.model
         {
             get
             {
-                return GetFormatedDate(dol);
+                return dol.Year == 1 ? "" : GetFormatedDate(dol);
             }
             set
             {
+                if (value == "")
+                {
+                    OnPropertyChanged("DOL");
+                    return;
+                }
                 OnPropertyChanged(ref dol, DateTime.Parse(value));
             }
         }
 
         public int Salary
         {
-            get { return Int32.Parse(salary); }
+            get { return salary == null ? 0 : Int32.Parse(salary); }
             set { OnPropertyChanged(ref salary, value.ToString()); }
         }
+
+        public Boolean IsContractor { get; set; }
 
         //INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -172,8 +189,8 @@ namespace EIS.model
                         else if (!avoidSpecialChar.IsMatch(last_name)) result = name + " should not contain  numbers and special chars";
                         break;
                     case "EmailId":
-                        if (string.IsNullOrWhiteSpace(city)) result = name + " should not be empty";
-                        //else if (!emailPattern.IsMatch(last_name)) result = "Invalid Email Id";
+                        if (string.IsNullOrWhiteSpace(email_id)) result = name + " should not be empty";
+                        //else if (!emailPattern.IsMatch(email_id)) result = "Invalid Email Id";
                         break;
                     case "City":
                         if (string.IsNullOrWhiteSpace(city)) result = name + " should not be empty";
@@ -195,7 +212,7 @@ namespace EIS.model
                         if (string.IsNullOrWhiteSpace(DOJ)) result = name + " should not be empty";
                         break;
                     case "Vendor":
-                        if (string.IsNullOrWhiteSpace(Vendor)) result = name + " should not be empty";
+                        if (IsContractor && string.IsNullOrWhiteSpace(Vendor)) result = name + " should not be empty";
                         break;
 
                 }
