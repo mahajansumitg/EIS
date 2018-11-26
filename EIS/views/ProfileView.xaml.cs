@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using static EIS.model.EmpInfo;
+using EIS.Pages;
 
 namespace EIS.views
 {
@@ -62,7 +63,11 @@ namespace EIS.views
             isUserPresent = (EmpInfoList.Count != 0);
 
 
-            if(isUserPresent) empInfo = EmpInfoList.First();
+            if (isUserPresent)
+            {
+                empInfo = EmpInfoList.First();
+                FormGrid.DataContext = empInfo;
+            }
 
         }
 
