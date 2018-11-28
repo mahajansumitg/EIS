@@ -173,7 +173,7 @@ namespace EIS.model
             {
                 string result = null;
                 Regex avoidSpecialChar = new Regex("^[a-zA-Z]*$");
-                Regex emailPattern = new Regex("[/w -] +@([/w -] +//.) +[/w -] + ");
+                Regex emailPattern = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 switch (name)
                 {
                     case "FirstName":
@@ -190,7 +190,7 @@ namespace EIS.model
                         break;
                     case "EmailId":
                         if (string.IsNullOrWhiteSpace(email_id)) result = name + " should not be empty";
-                        //else if (!emailPattern.IsMatch(email_id)) result = "Invalid Email Id";
+                        else if (!emailPattern.IsMatch(email_id)) result = "Invalid Email Id";
                         break;
                     case "City":
                         if (string.IsNullOrWhiteSpace(city)) result = name + " should not be empty";

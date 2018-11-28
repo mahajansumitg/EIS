@@ -23,9 +23,6 @@ using EIS.Pages;
 
 namespace EIS.views
 {
-    /// <summary>
-    /// Interaction logic for FormView.xaml
-    /// </summary>
     public partial class ProfileView : UserControl
     {
         Boolean isUserPresent;
