@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       xmlns:views="clr-namespace:EIS.views"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="mainPage">
+      Title="mainPage" Background="#FF65D87F">
 
     <Page.Resources>
         <DataTemplate x:Name="dashBoardViewTemplate" DataType="{x:Type views:DashBoardView}">
@@ -20,12 +20,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="1*" MaxHeight="30"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
-
-        <Grid Name="DockGrid" Background="White" Grid.Row="1">
+        <Label Content="Employee Information System" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+        <Grid Name="DockGrid" Background="#FFE2CC80" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
