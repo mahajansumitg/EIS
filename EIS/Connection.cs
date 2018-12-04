@@ -118,7 +118,8 @@ namespace EIS
             builder.Append(type.Name);
 
             builder.Append(" (");
-            Array.ForEach( type.GetProperties(),info => builder.Append(info.Name + ","));
+            Array.ForEach( type.GetFields(),info => builder.Append(info.Name + ","));
+               
             builder.Remove(builder.Length - 1, 1);
             builder.Append(") ");
 
