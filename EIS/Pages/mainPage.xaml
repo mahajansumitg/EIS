@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       xmlns:views="clr-namespace:EIS.views"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="mainPage" Background="#FF65D87F">
+      Title="mainPage" Background="White">
 
     <Page.Resources>
         <DataTemplate x:Name="dashBoardViewTemplate" DataType="{x:Type views:DashBoardView}">
@@ -25,7 +25,7 @@
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         <Label Content="Employee Information System" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
-        <Grid Name="DockGrid" Background="#FFE2CC80" Grid.Row="1">
+        <Grid Name="DockGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -55,6 +55,6 @@
             <Button Grid.Column="9" Margin="1" HorizontalAlignment="Stretch" Content="Log Out" Click="logout"/>
         </Grid>
         
-        <ContentControl Grid.Row="2" Content="{Binding}"/>
+        <ContentControl Grid.Row="2" Content="{Binding}" Background="Black"/>
     </Grid>
 </Page>
